@@ -15,7 +15,6 @@ class Trainings extends Component {
      })
  }
   render() {
-    const {array}=this.state
     return (
       <>
       <h1>Trainings</h1>
@@ -32,16 +31,26 @@ class Trainings extends Component {
             </tr>
             </thead>
             <tbody>
-
-              {array.map((item,index)=>{
-                return(
-                  <tr key={index}>
-                    <td>{item.id}</td>
-                    <td>{item.course}</td>
-                    <td>{item.company}</td>
-                  
-                  </tr>
-                )
+              {this.state.array.map((item,index)=>{
+                if (item.profile){
+                  return item.profile.map((profileItem, profileIndex) => (
+                    <tr key={`${index}-${profileIndex}`}>
+                      <td>{profileItem.name}</td>
+                      <td>{profileItem.email}</td>
+                      <td>{profileItem.phone}</td>
+                    </tr>
+                  ));
+                } else {
+                    return (
+                        <tr key={index}>
+                            <td>{item.id}</td>
+                            <td>{item.course}</td>
+                            <td>{item.company}</td>
+                        </tr>
+                        )
+                }
+             
+              
               }
               )}
             </tbody>
